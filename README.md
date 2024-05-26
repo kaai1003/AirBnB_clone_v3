@@ -162,4 +162,5 @@ Second part of Airbnb: Joann Vuong
 ## License
 Third part of Airbnb: Aimad Kacem
 ## RESTful API
+-- update Storage by adding 2 methods get and count
 Public Domain. No copy write protection. 
