@@ -163,4 +163,6 @@ Second part of Airbnb: Joann Vuong
 Third part of Airbnb: Aimad Kacem
 ## RESTful API
 -- update Storage by adding 2 methods get and count
+-- create API View for State Object
+-- create API View for City Object
 Public Domain. No copy write protection. 

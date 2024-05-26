@@ -12,7 +12,8 @@ from models.user import User
 
 classes = {"amenities": Amenity, "cities": City,"places": Place,
            "reviews": Review, "states": State, "users": User}
-counts ={}
-for key, obj in classes.items():
-    counts[key] = storage.count(obj)
-print(counts)
+all_states = storage.all(State)
+list_states = []
+for obj in all_states.values():
+    list_states.append(obj.to_dict())
+print(list_states)

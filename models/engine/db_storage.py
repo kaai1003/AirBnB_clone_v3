@@ -77,7 +77,6 @@ class DBStorage:
 
     def get(self, cls, id):
         """method to retrieve one object
-        
         Args
             cls(object): class object
             id(object attribute): string rep of instance object
