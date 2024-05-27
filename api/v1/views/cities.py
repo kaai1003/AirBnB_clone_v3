@@ -47,7 +47,46 @@ def delete_city(city_id):
     """delete city"""
     all_cities = storage.all(City)
     for obj in all_cities.values():
-        if obj.id == city_id_id:
+        if obj.id == city_id:
             storage.delete(obj)
+            storage.save()
             return jsonify({}), 200
+    abort(404)
+
+
+@app_views.route('/states/<state_id>/cities',
+                 methods=['POST'],
+                 strict_slashes=False)
+def create_city(state_id):
+    """create new city"""
+    states = storage.all(State)
+    for state in states.values():
+        if state.id == state_id:
+            if request.is_json:
+                dict = request.get_json()
+                if "name" in dict.keys():
+                    new_city = City(**dict)
+                    new_city.save()
+                    return jsonify(new_city.to_dict()), 201
+                abort(400, "Missing name")
+            abort(400, "Not a JSON")
+        abort(404)
+
+
+@app_views.route('/cities/<city_id>', methods=['PUT'],
+                 strict_slashes=False)
+def update_state(city_id):
+    """update city"""
+    cities = storage.all(City)
+    for city in cities.value():
+        if city.id == city_id:
+            if request.is_json:
+                dict = request.get_json()
+                for key, value in inputs.items():
+                    ignore = ['id', 'state_id', 'created_at', 'updated_at']
+                    if key not in ignore:
+                        setattr(city, key, value)
+                    city.save()
+                    return jsonify(city.to_dict()), 200
+            abort(400, "Not a JSON")
     abort(404)
