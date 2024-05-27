@@ -66,6 +66,7 @@ def create_city(state_id):
                 dict = request.get_json()
                 if "name" in dict.keys():
                     new_city = City(**dict)
+                    new_city.state_id = state_id
                     new_city.save()
                     return jsonify(new_city.to_dict()), 201
                 abort(400, "Missing name")
