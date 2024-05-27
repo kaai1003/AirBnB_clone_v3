@@ -75,13 +75,13 @@ def create_city(state_id):
 
 @app_views.route('/cities/<city_id>', methods=['PUT'],
                  strict_slashes=False)
-def update_state(city_id):
+def update_city(city_id):
     """update city"""
     cities = storage.all(City)
     for city in cities.value():
         if city.id == city_id:
             if request.is_json:
-                dict = request.get_json()
+                inputs = request.get_json()
                 for key, value in inputs.items():
                     ignore = ['id', 'state_id', 'created_at', 'updated_at']
                     if key not in ignore:
