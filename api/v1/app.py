@@ -2,6 +2,7 @@
 """Flask Web application Api module"""
 
 from flask import Flask
+from flask_cors import CORS
 from flask import jsonify
 from flask import Blueprint
 from models import storage
@@ -9,6 +10,7 @@ from api.v1.views import app_views
 from os import getenv
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 app.register_blueprint(app_views)
 
 
