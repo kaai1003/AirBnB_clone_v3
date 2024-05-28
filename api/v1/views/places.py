@@ -42,7 +42,7 @@ def get_place(place_id):
                  strict_slashes=False)
 def delete_place(place_id):
     """delete place"""
-    all_places = storage.all(place)
+    all_places = storage.all(Place)
     for obj in all_places.values():
         if obj.id == place_id:
             storage.delete(obj)

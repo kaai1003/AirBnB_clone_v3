@@ -78,16 +78,15 @@ def create_city(state_id):
                  strict_slashes=False)
 def update_city(city_id):
     """update city"""
-    cities = storage.all(City)
-    for city in cities.value():
-        if city.id == city_id:
-            if request.is_json:
-                inputs = request.get_json()
-                for key, value in inputs.items():
-                    ignore = ['id', 'state_id', 'created_at', 'updated_at']
-                    if key not in ignore:
-                        setattr(city, key, value)
-                    city.save()
-                    return jsonify(city.to_dict()), 200
-            abort(400, "Not a JSON")
+    city = storage.get(City, city_id)
+    if city is not None:
+        if request.is_json:
+            inputs = request.get_json()
+            for key, value in inputs.items():
+                ignore = ['id', 'state_id', 'created_at', 'updated_at']
+                if key not in ignore:
+                    setattr(city, key, value)
+                city.save()
+                return jsonify(city.to_dict()), 200
+        abort(400, "Not a JSON")
     abort(404)
